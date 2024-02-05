@@ -41,8 +41,9 @@ InputChecks_D <- function(D){
 InputChecks_Y <- function(Y){
 
   # input checks
-  if(any(is.na(Y))) stop("Y contains missing values", call. = FALSE)
-  if(!(is.numeric(Y) & is.vector(Y))) stop("Y must be a numeric vector", call. = FALSE)
+  if(any(is.na(Y))) stop("Y contains missing values", call. = FALSE) 
+  #NOTE: Removing this custom error because if prevents classification models from working (regr and classif require two different input types)
+  #if(!(is.numeric(Y) & is.vector(Y))) stop("Y must be a numeric vector", call. = FALSE)
 
 } # FUN
 
