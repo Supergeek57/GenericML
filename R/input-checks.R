@@ -187,22 +187,22 @@ InputChecks_num_splits <- function(num_splits){
 
 
 # checks if learner is correctly specified. If yes, that learner is returned
-get.learner_regr <- function(learner){
+get.learner_classif <- function(learner){
 
   # specify the machine learner
   if(is.environment(learner)){
     learner <- learner
   } else if(learner == "lasso"){
 
-    learner <- mlr3::lrn("regr.cv_glmnet", s = "lambda.min", alpha = 1)
+    learner <- mlr3::lrn("classif.cv_glmnet", s = "lambda.min", alpha = 1)
 
   } else if(learner == "random_forest"){
 
-    learner <- mlr3::lrn("regr.ranger", num.trees = 500)
+    learner <- mlr3::lrn("classif.ranger", num.trees = 500)
 
   } else if(learner == "tree"){
 
-    learner <- mlr3::lrn("regr.rpart")
+    learner <- mlr3::lrn("classif.rpart")
 
   } else{
 
@@ -224,7 +224,7 @@ InputChecks_propensity_scores <- function(propensity_scores){
                    "expect all propensity scores to be equal to roughly 0.5. ",
                    "The theory of the paper ",
                    "is only valid for randomized experiments. Are ",
-                   "you sure your data is from a randomomized experiment ",
+                   "you sure your data is from a randomized experiment ",
                    "and the estimator of the scores has been chosen appropriately?"),
             call. = FALSE)
   } # IF
@@ -233,7 +233,7 @@ InputChecks_propensity_scores <- function(propensity_scores){
 
     stop(paste0("Some estimated propensity scores are higher than 0.95, ",
                 " which is not sufficiently bounded away from one.",
-                " Are you sure your data is from a randomomized experiment ",
+                " Are you sure your data is from a randomized experiment ",
                 "and the estimator of the scores has been chosen appropriately?"))
   } # IF
 

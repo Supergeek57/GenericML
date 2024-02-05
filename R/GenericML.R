@@ -183,7 +183,7 @@ GenericML <- function(Z, D, Y,
 
   # render the learners mlr3 environments
   learners <- lapply(1:length(learners_GenericML),
-                     function(x) get.learner_regr(make.mlr3.environment(learners_GenericML[x])))
+                     function(x) get.learner_classif(make.mlr3.environment(learners_GenericML[x])))
 
 
   ### step 1: compute propensity scores ----

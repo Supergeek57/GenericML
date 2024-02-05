@@ -199,7 +199,7 @@ proxy_BCA <- function(Z, D, Y,
   # call main function
   proxy_BCA_NoChecks(Z = Z, D = D, Y = Y,
                           A_set = A_set,
-                          learner = get.learner_regr(make.mlr3.environment(learner)), # must be mlr3 object
+                          learner = get.learner_classif(make.mlr3.environment(learner)), # must be mlr3 object
                           min_variation = min_variation)
 
 } # END FUN
@@ -215,7 +215,7 @@ proxy_BCA_NoChecks <- function(Z, D, Y,
                                     min_variation = 1e-05){
 
   # specify the task
-  task.proxy_BCA.estimator <- mlr3::TaskRegr$new(id = "proxy_BCA",
+  task.proxy_BCA.estimator <- mlr3::TaskClassif$new(id = "proxy_BCA",
                                                       backend = data.frame(Y, Z),
                                                       target = "Y")
 
@@ -325,7 +325,7 @@ proxy_CATE <- function(Z, D, Y,
   # run main function
   proxy_CATE_NoChecks(Z = Z, D = D, Y = Y,
                       A_set = A_set,
-                      learner = get.learner_regr(make.mlr3.environment(learner)), # must be mlr3 object
+                      learner = get.learner_classif(make.mlr3.environment(learner)), # must be mlr3 object
                       proxy_BCA = proxy_BCA,
                       min_variation = min_variation)
 
@@ -353,7 +353,7 @@ proxy_CATE_NoChecks <- function(Z, D, Y,
   invisible(mlr3::set_threads(x = learner, n = 1L))
 
   # specify the task for estimating E[Y | D=1, Z]
-  task.proxy_CATE.treated.estimator <- mlr3::TaskRegr$new(id = "cate.treated",
+  task.proxy_CATE.treated.estimator <- mlr3::TaskClassif$new(id = "cate.treated",
                                                           backend = data.frame(Y, Z),
                                                           target = "Y")
 
@@ -378,7 +378,7 @@ proxy_CATE_NoChecks <- function(Z, D, Y,
 
     ## if no proxy baseline estimates were provided, estimate them
     # specify the task for estimating E[Y | D=0, Z]
-    task.proxy_CATE.controls.estimator <- mlr3::TaskRegr$new(id = "cate.controls",
+    task.proxy_CATE.controls.estimator <- mlr3::TaskClassif$new(id = "cate.controls",
                                                              backend = data.frame(Y, Z),
                                                              target = "Y")
 

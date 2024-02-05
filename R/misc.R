@@ -236,7 +236,7 @@ GenericML_single <- function(Z, D, Y,
   } # IF
 
   # render the learner an mlr3 environment
-  learner <- get.learner_regr(make.mlr3.environment(learner, regr = TRUE))
+  learner <- get.learner_classif(make.mlr3.environment(learner, regr = FALSE))
 
 
   # call the main function
