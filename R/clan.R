@@ -128,7 +128,7 @@ CLAN_NoChecks <- function(Z_CLAN,
       x <- Z_CLAN[membership[, group.base], j]
       y <- Z_CLAN[membership[, k], j]
 
-      if((stats::var(x) == stats::var(y)) & (stats::var(x) == 0)){
+      if(all(duplicated(y)[-1L])){ #changed this line to work for classification models
 
         # in case of zero variation, t.test() will throw an error. In this case, return uninformative out.mat[ct,]. NB: this bug has been spotted and fixed by Lucas Kitzmueller. All credits for this fix go to him!
         diff. <- ci.lo <- ci.up <- mean(x) - mean(y)
